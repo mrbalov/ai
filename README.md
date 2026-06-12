@@ -1,6 +1,6 @@
-# AI Skills & Tools
+# AI Skills & Tools 🤖
 
-This repository contains reusable AI skills and automation tools for AI.
+This is the place where I gather personally developed and reusable AI stuff for my everyday software development activities.
 
 ## 🛠️ Skills
 
