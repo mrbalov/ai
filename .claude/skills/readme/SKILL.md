@@ -76,6 +76,10 @@ This is the place where I gather personally developed and reusable AI stuff for 
 | **skill-name** | Skill description text (truncated to ~100 words) | [README.md](skills/skill-name/README.md) [SKILL.md](skills/skill-name/SKILL.md) |
 | **another-skill** | Another skill description | [README.md](skills/another-skill/README.md) [SKILL.md](skills/another-skill/SKILL.md) |
 
+## Resources
+
+- [AI tools under the hood](./AI.md)
+
 ## License
 
 MIT
