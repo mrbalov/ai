@@ -13,6 +13,13 @@
       "skillPath": "skills/claude-api/SKILL.md",
       "computedHash": "9f19be17e56542510e93d2943227c776ecbbe978307fc43d660dd04b346ef395"
     },
+    "document-ai": {
+      "source": "mrbalov/ai",
+      "ref": "main",
+      "sourceType": "github",
+      "skillPath": "skills/document-ai/SKILL.md",
+      "computedHash": "876073958b76c4d55cc46839233aba1312316b544e2635e7254b99cf22f642c0"
+    },
     "skill-creator": {
       "source": "anthropics/skills",
       "sourceType": "github",
