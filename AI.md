@@ -1,73 +1,73 @@
 # Available AI Tools
 
-This document catalogs all available AI tools, skills, and automation infrastructure in this project. It provides a comprehensive reference for understanding what AI capabilities are available and how they integrate together.
+This document catalogs all available AI tools (skills) in this project and visualizes their relationships and dependencies.
 
 ## 📦 Open-source Skills
 
-These skills are imported from external repositories and maintained as dependencies:
+| Skill | Description | Source |
+|-------|-------------|--------|
+| **algorithmic-art** | Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. Create original algorithmic art rather than copying existing artists' work to avoid copyright violations. | [anthropics/skills](https://github.com/anthropics/skills) |
+| **claude-api** | Build, debug, and optimize Claude API / Anthropic SDK apps. Apps built with this skill should include prompt caching. Also handles migrating existing Claude API code between Claude model versions (4.5 → 4.6, 4.6 → 4.7, retired-model replacements). | [anthropics/skills](https://github.com/anthropics/skills) |
+| **document-ai** | Discovers all available AI tools (skills, hooks, and agents); generates comprehensive AI.md with AI tool inventory, decision trees, and an Agent Tools Graph showing automation infrastructure. Catalogs AI capabilities from: .kiro/skills/, .claude/skills/, skills-lock.json, and enabled plugins. Also generates a Mermaid diagram visualizing hook→agent→skill→document relationships and automation workflows. | [mrbalov/ai](https://github.com/mrbalov/ai) |
+| **skill-creator** | Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy. | [anthropics/skills](https://github.com/anthropics/skills) |
 
-| Skill | Type | Description | Source |
-|-------|------|-------------|--------|
-| **algorithmic-art** | Generative Art | Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. | [anthropics/skills](https://github.com/anthropics/skills) |
-| **claude-api** | API Reference | Reference for the Claude API / Anthropic SDK — model ids, pricing, params, streaming, tool use, MCP, agents, caching, token counting, model migration. | [anthropics/skills](https://github.com/anthropics/skills) |
-| **document-ai** | Documentation | Discovers all available AI tools (skills, hooks, and agents); generates comprehensive AI.md with AI tool inventory, decision trees, and an Agent Tools Graph showing automation infrastructure. Catalogs AI capabilities from: .kiro/skills/, .claude/skills/, skills-lock.json, and enabled plugins. | [mrbalov/ai](https://github.com/mrbalov/ai) |
-| **skill-creator** | Skill Development | Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy. | [anthropics/skills](https://github.com/anthropics/skills) |
+## 🛠️ Custom Skills
+
+| Skill | Description | Source |
+|-------|-------------|--------|
+| **readme** | Generates a complete, consistent README.md file for the current repository by automatically discovering all skills in the @skills/ folder and creating a formatted skills inventory table. The skill scans SKILL.md files in each skill directory, extracts metadata from YAML frontmatter, and outputs a fully regenerated README with title, description, skills table, and license footer. | Local |
 
 ## 🎯 Common Workflows
 
-### Building Claude API Applications
-Use **claude-api** when:
-- Building LLM-powered applications
-- Choosing between different Claude models
-- Implementing prompt caching or tool use
-- Working with streaming, batches, or file handling
-- Migrating between Claude model versions
+### Creating & Documenting Skills
+- Use **skill-creator** to develop new capabilities from scratch, test them with realistic prompts, and iterate based on user feedback
+- Use **readme** to automatically generate and maintain documentation
+- Use **document-ai** to map out automation infrastructure and skill dependencies
 
-### Creating Algorithmic Art
-Use **algorithmic-art** when:
-- Generating visual art programmatically
-- Creating p5.js sketches with seeded randomness
-- Designing flow fields, particle systems, or generative patterns
-- Building interactive parameter exploration interfaces
+### Building with Claude API
+- Use **claude-api** for Anthropic SDK integration, prompt caching, and model version migrations
+- Pair with **skill-creator** to create reusable patterns
 
-### Skill Development & Optimization
-Use **skill-creator** when:
-- Creating new skills from scratch
-- Modifying or improving existing skills
-- Running evaluations to test skill performance
-- Benchmarking skill performance with variance analysis
-- Optimizing skill descriptions for better triggering accuracy
+### Generative Art & Creative Code
+- Use **algorithmic-art** for p5.js-based generative art with seeded randomness
+- Leverage parameter exploration for discovering artistic variations
 
-### AI Infrastructure Documentation
-Use **document-ai** when:
-- Discovering all available AI tools in the project
-- Visualizing automation workflows and dependencies
-- Identifying broken references in AI tool configurations
-- Generating documentation for team onboarding
-- Analyzing impact of file changes on AI tools
+### Project Documentation
+- Use **document-ai** to discover and visualize all AI tools in the project
+- Use **readme** to keep skill inventory documentation current
 
-## 📊 Project Summary
+## 🔗 Agent Tools Graph
 
-**Total Skills**: 4
-- Open-source: 4
-- Custom: 0
+This section will be populated when hooks and agents are configured. The graph shows relationships between:
+- 🪝 **Hooks** (Blue) — Trigger automation
+- 🤖 **Agents** (Green) — Execute tasks  
+- 💡 **Skills** (Orange) — Provide capabilities
+- 📄 **Documents** (Purple) — Referenced dependencies
 
-**Platforms**: Claude Code
+*No hooks or agents detected in `.claude/` directory at this time.*
 
-**Capabilities**:
-- ✅ LLM API reference and best practices
-- ✅ Generative art creation framework
-- ✅ Skill development and optimization tools
-- ✅ AI infrastructure documentation and discovery
+## 📄 Discovered Skills Location
 
-## 📝 Notes
+All skills are located in: `.agents/skills/`
 
-- All open-source skills are pinned to specific versions in `skills-lock.json`
-- Custom skills are maintained in `.agents/skills/`
-- Skills are symlinked to `.claude/skills/` for IDE integration
-- This documentation is regenerated dynamically from the current project state
+Discovery source:
+- Open-source skills registered in `skills-lock.json` (4 skills)
+- Custom skills in local directory (1 skill)
+- Total: 5 skills available
+
+## 📋 Summary
+
+| Category | Count |
+|----------|-------|
+| Open-source Skills | 4 |
+| Custom Skills | 1 |
+| Agent Skills | 0 |
+| **Total Skills** | **5** |
+| Hooks Configured | 0 |
+| Agents Configured | 0 |
 
 ---
 
-*Last updated: 2026-06-12*
-*Generated by: document-ai skill*
+**Last generated:** 2026-06-12
+
+To regenerate this documentation, run the `/document-ai` skill.
