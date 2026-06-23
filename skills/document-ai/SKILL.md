@@ -32,9 +32,9 @@ metadata:
 
 ## Overview
 
-This skill discovers all available AI tools, hooks, and agents in your project and generates a comprehensive AI.md file. It creates:
+This skill discovers all available AI tool (hooks, agents, and skills) in your project and generates a comprehensive AI.md file. It creates:
 
-1. **AI Tools Inventory** — All discovered skills organized by type (Custom, Open-source, Agent Skill)
+1. **AI Tools Inventory** — All discovered hooks, agents, and skills organized by type (Custom, Open-source, and Plugin)
 2. **Decision Trees** — Dynamic workflows based on discovered AI tools
 3. **Agent Tools Graph** — Mermaid diagram showing hook→agent→skill→document relationships
 4. **Document Dependency Map** — All files/documents referenced by AI entities, with usage descriptions
@@ -43,11 +43,11 @@ The skill maintains a single source of truth for your project's automation infra
 
 ## What This Skill Does
 
-### 1. AI Tools Discovery & Inventory
+### 1. AI Skills Discovery & Inventory
 
-Discovers AI tools from multiple sources and classifies them into three categories.
+Discovers AI skills from multiple sources and classifies them into three categories.
 
-#### Classification Rules (Source of Truth)
+#### Skill Classification Rules (Source of Truth)
 
 The classification of skills is determined by a single authoritative source:
 
@@ -61,33 +61,34 @@ The classification of skills is determined by a single authoritative source:
 - These are project-specific skills created by the team for this project only.
 - They have no external repository reference in `skills-lock.json`.
 
-**Agent skills** = Skills from enabled plugins in `.claude/settings.json` (e.g., `enabledPlugins`).
+**Plugin skills** = Skills from enabled plugins in `.claude/settings.json` (e.g., `enabledPlugins`).
 - These come from third-party plugin systems, not from local skill directories.
+- All the skills coming from the plugin MUST be documented in the output document.
 
-#### Discovery Order (with deduplication)
+#### Skills Discovery Order (with deduplication)
 
 1. Parse `skills-lock.json` FIRST → these are all open-source (establishes the open-source name set)
 2. Scan `.kiro/skills/` and `.claude/skills/` → only skills NOT in the open-source name set are custom
-3. Check `.claude/settings.json` for enabled plugins → these are agent skills
+3. Check `.claude/settings.json` for enabled plugins → these are plugin skills
 
 #### Critical Rule: No Skill Appears in Multiple Categories
 
 A skill name appears in exactly ONE section of the output. The priority is:
 - `skills-lock.json` presence → Open-source (highest priority)
 - Local directory without lock entry → Custom
-- Plugin system → Agent Skill
+- Plugin system → Plugin Skill
 
 ### 2. Dynamic Decision Trees
 
 Analyzes discovered skills to create context-aware decision trees:
 - Identifies available skill types (implementation, review, testing, docs, etc.)
 - Creates workflows for common scenarios
-- Only mentions skills that ACTUALLY exist in the project
+- Only mentions skills that ACTUALLY exist in the project (including all available custom, open-source, and plugin skills)
 - Updates automatically when skills are added/removed
 
 ### 3. Agent Tools Graph with Document Dependencies
 
-The graph now includes **four node types** — hooks, agents, skills, AND documents/files that are referenced by those entities. This provides a complete picture of what each AI tool depends on.
+The graph includes **four node types** — hooks, agents, skills, AND documents/files that are referenced by those entities. This provides a complete picture of what each AI tool depends on.
 
 #### Why Document Nodes Matter
 
@@ -149,7 +150,7 @@ Every discovered reference is validated against the filesystem. The behavior dep
 
 ## Document Reference Discovery
 
-This is the core new capability. The skill extracts file/document references from AI entity configurations.
+This is the core capability. The skill extracts file/document references from AI entity configurations.
 
 ### What Counts as a "Real Reference"
 
