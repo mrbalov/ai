@@ -238,13 +238,15 @@ Parse `skills-lock.json` at the project root.
 ```
 
 - Every key in `skills` object → open-source skill
-- Collect ALL into "open-source names" set
+- Collect ALL into "open-source" set
 - Then scan local dirs, only classify as Custom if NOT in open-source set
-- Check `.claude/settings.json` for agent skills
+- Check `.claude/settings.json` for plugin skills specifies in `enabledPlugins`; describe every skill enabled by every plugin
 
 ### Step 2: Hook Discovery (Platform-Specific)
 
-**Kiro Platform** (`.kiro/hooks/*.kiro.hook`):
+## Kiro
+
+(`.kiro/hooks/*.kiro.hook`):
 - Parse each JSON file
 - Extract: `name`, `when.type`, `then.type`, `then.prompt`
 - For `askAgent` hooks:
@@ -255,7 +257,9 @@ Parse `skills-lock.json` at the project root.
 
 ### Step 3: Agent Discovery (Platform-Specific)
 
-**Kiro Platform** (`.kiro/agents/*.agent.json`):
+#### Kiro
+
+(`.kiro/agents/*.agent.json`):
 - Parse each JSON file
 - Extract: `name`, `displayName`, `description`, `skills[]`, `systemPrompt`
 - For `skills` array → skill references (validate existence)
@@ -276,7 +280,7 @@ Aggregate all discovered file references from hooks, agents, and skills:
 Build a directed graph with four node types:
 - **Hooks**: name, trigger type, description
 - **Agents**: name, displayName, description
-- **Skills**: name, type (custom/open-source/agent), description
+- **Skills**: name, type (custom/open-source/plugin), description
 - **Documents**: file path, short name (filename), usage summary
 
 Edges:
@@ -366,7 +370,7 @@ graph TD
 | Skill | Type | Description | Source |
 ...
 
-## 🤖 Agent Skills
+## 🤖 Plugin Skills
 | Skill | Type | Description | Source |
 ...
 
